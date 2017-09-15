@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="logos">
+        <item>@drawable/jollibee</item>
+        <item>@drawable/mcdo</item>
+        <item>@drawable/kfc</item>
+        <item>@drawable/chowking</item>
+    </array>
+
+
+    <array name="names">
+        <item>jollibee</item>
+        <item>mcdo</item>
+        <item>kfc</item>
+        <item>chowking</item>
+    </array>
+
+
+</resources>
