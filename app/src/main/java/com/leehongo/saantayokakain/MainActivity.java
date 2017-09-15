@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,14 +26,18 @@ public class MainActivity extends AppCompatActivity {
     private ImageView logo;
     private TextView name;
     private Button btnPick, btnRePick;
-    //private LinearLayout layoutInitial,layoutMain;
     private ViewFlipper mViewFlipper;
 
-    TypedArray logos,names;
     CountDownTimer cTimer = null;
+    Random rand = new Random();
 
-    private boolean repick = false;
+    List<String> names;
+    List<String> showedAlready;
+    TypedArray logos;
 
+    Drawable selectedImage;
+    String selectedName;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,15 +58,24 @@ public class MainActivity extends AppCompatActivity {
         btnRePick.setOnClickListener(ocl);
 
         logos = getResources().obtainTypedArray(R.array.logos);
-        names = getResources().obtainTypedArray(R.array.names);
+        names = Arrays.asList(getResources().getStringArray(R.array.names));
+
+        showedAlready = new ArrayList<String>();
+    }
+
+    private void selectedItem(){
+
+        int i = rand.nextInt(names.size());
+
+        selectedImage = ContextCompat.getDrawable(getApplication(),logos.getResourceId(i, 0));
+        selectedName = names.get(i);
+        startAnimation();
+
     }
 
     private void startAnimation(){
 
         cTimer = new CountDownTimer(SELECTEDTIME, TICKTIME) {
-
-            Random rand = new Random();
-            int i = rand.nextInt(logos.length());
 
             public void onTick(long millisUntilFinished) {
                 //TODO do animate 10 image within x seconds
@@ -70,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                Drawable img = ContextCompat.getDrawable(getApplication(),logos.getResourceId(i, 0));
-                logo.setBackground(img);
-                name.setText(names.getString(i));
+                logo.setBackground(selectedImage);
+                name.setText(selectedName);
+
                 btnRePick.setVisibility(View.VISIBLE);
                 cTimer.cancel();
             }
@@ -87,20 +102,14 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.btn_pick:
                     layoutInitial.setVisibility(View.GONE);
                     layoutMain.setVisibility(View.VISIBLE);
-                    startAnimation();
+                    selectedItem();
                     break;
                 case R.id.btn_repick:
-                    repick = true;
-                    startAnimation();
+                    selectedItem();
                     break;
             }
         }
     };
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }
 
 
