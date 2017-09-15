@@ -1,19 +1,12 @@
 package com.leehongo.saantayokakain;
 
-import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AnimationSet;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,10 +20,11 @@ public class MainActivity extends AppCompatActivity {
     final int SELECTEDTIME = 2000;
     final int TICKTIME = 1000;
 
+    View layoutInitial, layoutMain;
     private ImageView logo;
     private TextView name;
     private Button btnPick, btnRePick;
-    private LinearLayout layoutInitial,layoutSelected;
+    //private LinearLayout layoutInitial,layoutMain;
     private ViewFlipper mViewFlipper;
 
     TypedArray logos,names;
@@ -43,24 +37,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+        layoutInitial = findViewById(R.id.include_initial);
+        layoutMain = findViewById(R.id.include_main);
+
         logo = (ImageView) findViewById(R.id.logo);
         name = (TextView) findViewById(R.id.name);
         btnPick = (Button) findViewById(R.id.btn_pick);
         btnRePick = (Button) findViewById(R.id.btn_repick);
         mViewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
-        layoutInitial = (LinearLayout) findViewById(R.id.layout_initial);
-        layoutSelected = (LinearLayout) findViewById(R.id.layout_selected);
 
-
-        layoutSelected.setVisibility(View.INVISIBLE);
+        layoutMain.setVisibility(View.INVISIBLE);
 
         btnPick.setOnClickListener(ocl);
         btnRePick.setOnClickListener(ocl);
 
-        Resources res = getResources();
-        logos = res.obtainTypedArray(R.array.logos);
-        names = res.obtainTypedArray(R.array.names);
-
+        logos = getResources().obtainTypedArray(R.array.logos);
+        names = getResources().obtainTypedArray(R.array.names);
     }
 
     private void startAnimation(){
@@ -94,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             switch ( view.getId()){
                 case R.id.btn_pick:
                     layoutInitial.setVisibility(View.GONE);
-                    layoutSelected.setVisibility(View.VISIBLE);
+                    layoutMain.setVisibility(View.VISIBLE);
                     startAnimation();
                     break;
                 case R.id.btn_repick:
@@ -108,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//
     }
 }
+
+

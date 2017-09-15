@@ -4,57 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<LinearLayout
-    android:id="@+id/layout_initial"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
-
-    <Button
-        android:id="@+id/btn_pick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pick" />
-
-</LinearLayout>
-
-<LinearLayout
-    android:id="@+id/layout_selected"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
-
-    <ViewFlipper
-        android:id="@+id/view_flipper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:stretchMode="columnWidth"
-            android:numColumns="auto_fit"/>
-        </ViewFlipper>
 
     <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btn_repick"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="repick"
-        android:visibility="invisible"/>
-</LinearLayout>
+        android:layout_marginTop="20dp"
+        android:textSize="40sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:text="Saan Tayo Kakain?"
+        android:gravity="center"/>
 
+    <include android:id="@+id/include_initial" layout="@layout/include_initial"/>
 
+    <include android:id="@+id/include_main" layout="@layout/include_main"/>
 
 
 </LinearLayout>

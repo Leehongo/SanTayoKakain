@@ -1,18 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <array name="names">
+        <item>Jollibee</item>
+        <item>Mcdo</item>
+        <item>KFC</item>
+        <item>Chowking</item>
+        <item>Mang Inasal</item>
+        <item>Bon Chon</item>
+        <item>Classic Savory</item>
+        <item>Mini Stop</item>
+        <item>7-Eleven</item>
+        <item>Tokyo Tokyo</item>
+        <item>Adobo Connection</item>
+        <item>North Park</item>
+        <item>Army Navy</item>
+        <item>Shakeys</item>
+        <item>Pizza Hut</item>
+    </array>
+
     <array name="logos">
         <item>@drawable/jollibee</item>
         <item>@drawable/mcdo</item>
         <item>@drawable/kfc</item>
         <item>@drawable/chowking</item>
-    </array>
-
-
-    <array name="names">
-        <item>jollibee</item>
-        <item>mcdo</item>
-        <item>kfc</item>
-        <item>chowking</item>
+        <item>@drawable/manginasal</item>
+        <item>@drawable/bonchon</item>
+        <item>@drawable/savory</item>
+        <item>@drawable/mini_stop</item>
+        <item>@drawable/seven7_eleven</item>
+        <item>@drawable/tokyotokyo</item>
+        <item>@drawable/adobo_connection</item>
+        <item>@drawable/northpark</item>
+        <item>@drawable/army_navy</item>
+        <item>@drawable/shakeys</item>
+        <item>@drawable/pizza_hut</item>
     </array>
 
 
