@@ -1,21 +1,32 @@
 package com.leehongo.saantayokakain;
 
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+import static android.R.id.list;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,19 +36,13 @@ public class MainActivity extends AppCompatActivity {
     View layoutInitial, layoutMain;
     private ImageView logo;
     private TextView name;
-    private Button btnPick, btnRePick;
+    private Button btnPick;
+    private ImageView btnRePick;
     private ViewFlipper mViewFlipper;
 
-    CountDownTimer cTimer = null;
-    Random rand = new Random();
-
-    List<String> names;
-    List<String> showedAlready;
+    ArrayList<String> names;
     TypedArray logos;
 
-    Drawable selectedImage;
-    String selectedName;
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,36 +54,31 @@ public class MainActivity extends AppCompatActivity {
         logo = (ImageView) findViewById(R.id.logo);
         name = (TextView) findViewById(R.id.name);
         btnPick = (Button) findViewById(R.id.btn_pick);
-        btnRePick = (Button) findViewById(R.id.btn_repick);
+        btnRePick = (ImageView) findViewById(R.id.btn_repick);
         mViewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
-
-        layoutMain.setVisibility(View.INVISIBLE);
 
         btnPick.setOnClickListener(ocl);
         btnRePick.setOnClickListener(ocl);
 
         logos = getResources().obtainTypedArray(R.array.logos);
-        names = Arrays.asList(getResources().getStringArray(R.array.names));
-
-        showedAlready = new ArrayList<String>();
+        names = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.names)));
     }
 
     private void selectedItem(){
 
-        int i = rand.nextInt(names.size());
+        int i = new Random().nextInt(names.size());
 
-        selectedImage = ContextCompat.getDrawable(getApplication(),logos.getResourceId(i, 0));
-        selectedName = names.get(i);
-        startAnimation();
-
+        String selectedName = names.get(i);
+        Drawable selectedImage = ContextCompat.getDrawable(getApplication(),logos.getResourceId(i, 0));
+        startAnimation(selectedImage,selectedName);
     }
 
-    private void startAnimation(){
+    private void startAnimation(final Drawable selectedImage, @NonNull final String selectedName){
 
-        cTimer = new CountDownTimer(SELECTEDTIME, TICKTIME) {
+        new CountDownTimer(SELECTEDTIME, TICKTIME) {
 
             public void onTick(long millisUntilFinished) {
-                //TODO do animate 10 image within x seconds
+                //TODO do animate images within x seconds
                 logo.setBackground(null);
                 name.setText("picking...");
                 btnRePick.setVisibility(View.INVISIBLE);
@@ -89,9 +89,8 @@ public class MainActivity extends AppCompatActivity {
                 name.setText(selectedName);
 
                 btnRePick.setVisibility(View.VISIBLE);
-                cTimer.cancel();
+                this.cancel();
             }
-
         }.start();
     }
 
@@ -102,12 +101,12 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.btn_pick:
                     layoutInitial.setVisibility(View.GONE);
                     layoutMain.setVisibility(View.VISIBLE);
-                    selectedItem();
                     break;
                 case R.id.btn_repick:
-                    selectedItem();
+                    //TODO remove?
                     break;
             }
+            selectedItem();
         }
     };
 }

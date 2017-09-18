@@ -2,22 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:paddingTop="20dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="20dp">
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:textSize="40sp"
         android:textColor="@android:color/black"
         android:textStyle="bold"
         android:text="Saan Tayo Kakain?"
         android:gravity="center"/>
 
-    <include android:id="@+id/include_initial" layout="@layout/include_initial"/>
+    <include android:id="@+id/include_initial"
+        layout="@layout/include_initial"/>
 
-    <include android:id="@+id/include_main" layout="@layout/include_main"/>
+    <include android:id="@+id/include_main"
+        layout="@layout/include_main"
+        android:visibility="invisible"/>
 
 
 </LinearLayout>
