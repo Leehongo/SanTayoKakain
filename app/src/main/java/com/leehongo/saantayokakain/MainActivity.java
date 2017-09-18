@@ -3,6 +3,9 @@ package com.leehongo.saantayokakain;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -81,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 //TODO do animate images within x seconds
                 logo.setBackground(null);
                 name.setText("picking...");
-                btnRePick.setVisibility(View.INVISIBLE);
             }
 
             public void onFinish() {
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     layoutMain.setVisibility(View.VISIBLE);
                     break;
                 case R.id.btn_repick:
-                    //TODO remove?
+                    btnRePick.setVisibility(View.INVISIBLE);
                     break;
             }
             selectedItem();
